@@ -47,7 +47,10 @@ public class Consumer {
         System.out.println("response headers -" + responseHeaders);
 
         List<String> cookies = responseHeaders.get(HttpHeaders.SET_COOKIE);
-        String sessionId = cookies.get(0).substring(0, "JSESSIONID=".length() + 32);
+        String sessionId = null;
+        if (cookies != null) {
+            sessionId = cookies.get(0).substring(0, "JSESSIONID=".length() + 32);
+        }
         System.out.println(sessionId);
         headers.add(HttpHeaders.COOKIE, sessionId);
     }
